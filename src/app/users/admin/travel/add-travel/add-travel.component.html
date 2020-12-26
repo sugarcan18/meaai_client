@@ -1,0 +1,81 @@
+<app-header></app-header>
+<div class="wrapper">
+
+<app-sidebar></app-sidebar>
+    <div class="container">
+        <div class="blog-content">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="title">
+                    <p>เพิ่มข้อมูล สถานที่ท่องเที่ยว</p>
+                </div>
+                <div class="title-content">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="nowrap">
+                                <td>ชื่อสถานที่ท่องเที่ยว</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="travel.name"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รายละเอียด</td>
+                                <td> : </td>
+                                <td><textarea type="text" class="form-control" [(ngModel)]="travel.description"></textarea></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ประเภทท่องเที่ยว</td>
+                                <td> : </td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="travel.type">
+                                        <option *ngFor="let item of travel_type" value="{{item.travel_type_id}}">{{item.travel_type_name}}</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ประเภทฤดูกาล</td>
+                                <td> : </td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="travel.season">
+                                        <option *ngFor="let item of season_type" value="{{item.season_type_id}}">{{item.season_type_name}}</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>จำนวนคนแนะนำ</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="travel.people"></td>
+                            </tr>
+                            <tr>
+                                <td>พิกัด ละติจูด</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="travel.lat"></td>
+                            </tr>
+                            <tr>
+                                <td>พิกัด ลองติจูด</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="travel.lng"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รูปภาพ</td>
+                                <td> : </td>
+                                <td>
+                                <div class="custom-file">
+                                    <input class="custom-file-input" type="file" id="imageflies" name="imageflies" multiple (change)="uploadImages($event)">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <br>
+                                    <span *ngFor="let i of filesToUpload_name" style="font-size: 0.7rem;">
+                                        {{i}} , <br>
+                                    </span>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-center">
+                        <button class="btn btn-primary" (click)="saveData()">บันทึก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

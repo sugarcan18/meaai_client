@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="title text-center">
+    <h1>ค้นหา</h1>
+  </div>
+  <div class="shadow p-4 mb-5 bg-white rounded">
+    <label for="exampleFormControlSelect1" style="color: #726a95">เลือก ประเภทสถานที่ท่องเที่ยว</label>
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="search_.type">
+      <option value="ธรรมชาติ">ธรรมชาติ</option>
+      <option value="น้ำตก">น้ำตก</option>
+      <option value="วัฒนธรรม">วัฒนธรรม</option>
+      <option value="แหล่งเรียนรู้">แหล่งเรียนรู้</option>
+    </select>
+    <br />
+    <label for="exampleFormControlSelect1" style="color: #726a95">เลือก ฤดูกาล</label>
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="search_.season">
+      <option value="ฤดูร้อน">ฤดูร้อน</option>
+      <option value="ฤดูฝน">ฤดูฝน</option>
+      <option value="ฤดูหนาว">ฤดูหนาว</option>
+    </select>
+    <br />
+    <label for="exampleFormControlSelect1" style="color: #726a95">จำนวนนักท่องเที่ยว</label>
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="search_.people">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <br>
+    <div class="text-center">
+        <button type="button" class="btn btn-success" (click)="search()">ค้นหา</button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let travel of travel">
+      <div class="card m-t-5 shadow card-show pointer">
+        <img class="card-img-top traval-img" src="{{ travel.images[0].path }}" alt="Card image cap" />
+        <div class="card-body">
+          <h2 class="nowrap" style="color:#007bff">{{travel.travel_name}}</h2>
+          <p class="card-text">
+            {{(travel.travel_detail.length > 60)? (travel.travel_detail|slice:0:60)+'...' :(travel.travel_detail)}}
+          </p>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="totTravel(travel.travel_id)">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+<app-footer></app-footer>

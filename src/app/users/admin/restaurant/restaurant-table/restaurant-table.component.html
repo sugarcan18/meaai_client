@@ -1,0 +1,139 @@
+<app-header></app-header>
+<div class="wrapper">
+
+<app-sidebar></app-sidebar>
+    <div class="container">
+        <div class="blog-content">
+            <div class="blog-content">
+                <div class="title">
+                  <p>ตารางร้านอาหาร</p>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered table-striped">
+                    <thead class="bg-head">
+                      <tr class="text-center nowrap">
+                        <th>No.</th>
+                        <th>ชื่อร้านอาหาร</th>
+                        <th>รายละเอียด</th>
+                        <th>ประเภทร้านอาหาร</th>
+                        <th>เวลาเปิดร้าน</th>
+                        <th>เวลาปิดร้าน</th>
+                        <th>ที่อยู่</th>
+                        <th>เบอร์โทร</th>
+                        <th>เว็บไซต์</th>
+                        <th>แก้ไข</th>
+                        <th>ลบ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let res of res; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td>{{ res.restaurant_name }}</td>
+                        <td>{{ (res.description|slice:0:60)+'...' }}</td>
+                        <td>{{ res.restaurant_type[0].restaurant_type_name }}</td>
+                        <td>{{ res.time_open }}</td>
+                        <td>{{ res.time_close }}</td>
+                        <td>{{ res.address }}</td>
+                        <td>{{ res.phone }}</td>
+                        <td>{{ res.website }}</td>
+                        <td class="text-center pointer bg-edit"><i class="fa fa-pencil-square-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#updateModal" (click)="checkUpdate(res.id)"></i></td>
+                        <td class="text-center pointer bg-edit"><i class="fa fa-trash-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#deleteModal" (click)="checkDelete(res.id)"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <h3>ยืนยันการลบข้อมูล</h3>
+            <h6>ชื่อร้านอาหาร : {{ itemDelete.restaurant_name }}</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" (click)="DeleteItem()">ลบข้อมูล</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Update-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="title">
+                <p>เพิ่มข้อมูล ร้านอาหาร</p>
+            </div>
+            <div class="title-content">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr class="nowrap">
+                            <td>ชื่อร้านอาหาร</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="res_update.name"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>รายละเอียด</td>
+                            <td> : </td>
+                            <td><textarea type="text" class="form-control" [(ngModel)]="res_update.description"></textarea></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ประเภทร้านอาหาร</td>
+                            <td> : </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="res_update.type">
+                                    <option *ngFor="let item of restaurant_type" value="{{item.restaurant_type_id}}">{{item.restaurant_type_name}}</option>
+                                  </select>
+                            </td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>เวลาเปิดร้าน</td>
+                            <td> : </td>
+                            <td><input type="time" class=" form-control" [(ngModel)]="res_update.time_open"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>เวลาปิดร้าน</td>
+                            <td> : </td>
+                            <td><input type="time" class=" form-control" [(ngModel)]="res_update.time_close"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ที่อยู่</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="res_update.address"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>โทรศัพท์</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="res_update.phone"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>เว็บไซต์</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="res_update.website"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-center">
+                    <button class="btn btn-primary" (click)="updateData()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" >ลบข้อมูล</button>
+        </div> -->
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<!-- <div class="title-img">
+    <img class="img-title-content" [src]="travel_res[0].images[0].path">
+</div> -->
+
+<div class="container m-t-5">
+  <div class="shadow-lg p-5 mb-5 bg-white rounded">
+    <div class="content">
+      <div class="title text-center">
+        <h1>{{ travel_res[0].travel_name }}</h1>
+      </div>
+      <div class="detail">
+        <p>{{ travel_res[0].travel_detail }}</p>
+      </div>
+      <hr>
+      <div class="type-content">
+          <div class="d-flex">
+             <h4>ประเภท</h4>
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <h4 style="color: #28B463">{{ travel_res[0].travel_type_id[0].travel_type_name }}</h4>
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             |
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <h4>ฤดูแนะนำ</h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <h4 style="color: #28B463">{{ travel_res[0].season_id[0].season_type_name }}</h4>
+          </div>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>แผนที่</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-outline-info" (click)="toMap()" > <i class="fa fa-map-o" aria-hidden="true"></i> คลิก</button>
+      </div>
+      <hr>
+      <div class="images">
+        <h4>รูปภาพ <i class="fa fa-picture-o" style="color:red" aria-hidden="true"></i></h4>
+        <br>
+        <div class="blog-img">
+            <a *ngFor="let images of travel_res[0].images" class="col-sm-12 col-md-4 col-lg-3">
+                <img class="img-show shadow" [src]="images.path">
+            </a>
+        </div>
+      </div>
+      <hr>
+      <div class="acc">
+        <div class="acc-content">
+            <h4>สถานที่พักใกล้เคี่ยง</h4>
+            <button type="button" *ngFor="let item of travel_res[0].travel_acc" class="btn btn-outline-success m-2" (click)="toAcc(item.acc_id)" >{{item.acc_name[0].accommodation_name}}</button>
+        </div>
+      </div>
+      <hr>
+      <div class="res">
+        <div class="res-content">
+            <h4>ร้านอาหารใกล้เคียง</h4>
+            <button type="button" *ngFor="let item of travel_res[0].travel_res" class="btn btn-outline-secondary m-2" (click)="toRes(item.res_id)" >{{item.res_name[0].restaurant_name}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

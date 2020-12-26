@@ -1,0 +1,31 @@
+.img-title-content{
+    width: 100%;
+    height: auto;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.text-center {
+    text-align: center;
+}
+
+.m-t-5 {
+    margin-top: 5%;
+}
+.blog-img{
+    text-align: center;
+}
+.img-show{
+    width: auto;
+    height: 250px;
+    margin: 1%;
+
+}
+.shadow{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15)
+}

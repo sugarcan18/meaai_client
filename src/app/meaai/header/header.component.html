@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MEA AI</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">หน้าแรก <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/search']">ค้นหา</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/travels']">สถานที่ท่องเที่ยว</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/accommodation']" >สถานที่พัก</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/restaurant']" >ร้านอาหาร</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/news/news-content']" >ข่าวสาร</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        
+        <!-- user not login -->
+        <div *ngIf="login.status === false" class="nav-item dropdown">
+            <a class="dropdown-item btn-login" href="#" [routerLink]="['/login']"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign In</a>
+        </div>
+
+        <!-- user login success -->
+        <!-- <div *ngIf="login.status === true" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" ><i class="fa fa-cog" aria-hidden="true"></i> Profile</a>
+            <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
+          </div>
+        </div> -->
+
+         <!-- admin login success -->
+         <div *ngIf="login.status === true" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['/users/profile']"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a>
+            <a class="dropdown-item" *ngIf="type_user == 2" [routerLink]="['/users/admin/travel-table']"><i class="fa fa-cog" aria-hidden="true"></i> Manage</a>
+            <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </nav>

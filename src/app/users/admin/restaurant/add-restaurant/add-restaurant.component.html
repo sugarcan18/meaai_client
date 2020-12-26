@@ -1,0 +1,82 @@
+<app-header></app-header>
+<div class="wrapper">
+
+<app-sidebar></app-sidebar>
+    <div class="container">
+        <div class="blog-content">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="title">
+                    <p>เพิ่มข้อมูล ร้านอาหาร</p>
+                </div>
+                <div class="title-content">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="nowrap">
+                                <td>ชื่อร้านอาหาร</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="restaurant.name"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รายละเอียด</td>
+                                <td> : </td>
+                                <td><textarea type="text" class="form-control" [(ngModel)]="restaurant.description"></textarea></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ประเภทร้านอาหาร</td>
+                                <td> : </td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="restaurant.type">
+                                        <option *ngFor="let item of restaurant_type" value="{{item.restaurant_type_id}}">{{item.restaurant_type_name}}</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>เวลาเปิดร้าน</td>
+                                <td> : </td>
+                                <td><input type="time" class=" form-control" [(ngModel)]="restaurant.time_open"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>เวลาปิดร้าน</td>
+                                <td> : </td>
+                                <td><input type="time" class=" form-control" [(ngModel)]="restaurant.time_close"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ที่อยู่</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="restaurant.address"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>โทรศัพท์</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="restaurant.phone"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>เว็บไซต์</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="restaurant.website"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รูปภาพ</td>
+                                <td> : </td>
+                                <td>
+                                <div class="custom-file">
+                                    <input class="custom-file-input" type="file" id="imageflies" name="imageflies" multiple (change)="uploadImages($event)">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <br>
+                                    <span *ngFor="let i of filesToUpload_name" style="font-size: 0.7rem;">
+                                        {{i}} , <br>
+                                    </span>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-center">
+                        <button class="btn btn-primary" (click)="saveData()" >บันทึก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

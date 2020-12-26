@@ -1,0 +1,9 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "username": "root",
+    "password": "",
+    "database": "CUSTOM_DB",
+    "entities":["src/**/**.entity{.ts,.js}"],
+    "synchronize": true
+}

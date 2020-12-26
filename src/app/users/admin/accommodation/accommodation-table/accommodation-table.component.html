@@ -1,0 +1,161 @@
+<app-header></app-header>
+<div class="wrapper">
+
+<app-sidebar></app-sidebar>
+    <div class="container">
+        <div class="blog-content">
+            <div class="title">
+                <p>ตารางสถานที่พัก</p>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="bg-head">
+                    <tr class="text-center nowrap">
+                      <th>No.</th>
+                      <th>สถานที่พัก</th>
+                      <th>รายละเอียด</th>
+                      <th>ประเภทที่พัก</th>
+                      <th>ประเภทห้องพัก</th>
+                      <th>จำนวนห้องพัก</th>
+                      <th>ราคาเริ่มต้น</th>
+                      <th>ราคาสูงสุด</th>
+                      <th>ที่อยู่</th>
+                      <th>เบอร์โทร</th>
+                      <th>เว็บไซต์</th>
+                      <th>อีเมล์</th>
+                      <th>แก้ไข</th>
+                      <th>ลบ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let acc of acc; let i = index">
+                      <td class="text-center">{{ i + 1 }}</td>
+                      <td>{{ acc.accommodation_name }}</td>
+                      <td>{{ (acc.description |slice:0:60)+'...' }}</td>
+                      <td>{{ acc.accommodation_type[0].accommodation_type_name }}</td>
+                      <td>{{ acc.room_type[0].room_type_name }}</td>
+                      <td>{{ acc.room }} ห้อง</td>
+                      <td>{{ acc.period_start_price }} บาท</td>
+                      <td>{{ acc.period_end_price }} บาท</td>
+                      <td>{{ acc.address }}</td>
+                      <td>{{ acc.phone }}</td>
+                      <td>{{ acc.website }}</td>
+                      <td>{{ acc.email }}</td>
+                      <td class="text-center pointer bg-edit"><i class="fa fa-pencil-square-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#updateModal" (click)="checkUpdate(acc.id)"></i></td>
+                      <td class="text-center pointer bg-edit"><i class="fa fa-trash-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#deleteModal" (click)="checkDelete(acc.id)"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <h3>ยืนยันการลบข้อมูล</h3>
+            <h6>ชื่อสถานที่พัก : {{itemDelete.accommodation_name}}</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" (click)="DeleteItem()">ลบข้อมูล</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Update-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="title">
+                <p>แก้ไขข้อมูล สถานที่พัก</p>
+            </div>
+            <div class="title-content">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr class="nowrap">
+                            <td>ชื่อสถานที่พัก</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.accommodation_name"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>รายละเอียด</td>
+                            <td> : </td>
+                            <td><textarea type="text" class="form-control" [(ngModel)]="accommodation_update.description"></textarea></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ประเภทที่พัก</td>
+                            <td> : </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="accommodation_update.accommodation_type">
+                                    <option *ngFor="let item of acc_type" value="{{item.accommodation_type_id}}">{{item.accommodation_type_name}}</option>
+                                  </select>
+                            </td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ประเภทห้องพัก</td>
+                            <td> : </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="accommodation_update.room_type">
+                                    <option *ngFor="let item of room_type" value="{{item.room_type_id}}">{{item.room_type_name}}</option>
+                                  </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>จำนวนห้องพัก</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.room"></td>
+                        </tr>
+                        <tr>
+                            <td>ราคาห้องพัก เริ่มต้น</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.period_start_price"></td>
+                        </tr>
+                        <tr>
+                            <td>ราคาห้องพัก สูงสุด</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.period_end_price"></td>
+                        </tr>
+                        <tr>
+                            <td>ที่อยู่</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.address"></td>
+                        </tr>
+                        <tr>
+                            <td>เบอร์โทร</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.phone"></td>
+                        </tr>
+                        <tr>
+                            <td>เว็บไซต์</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.website"></td>
+                        </tr>
+                        <tr>
+                            <td>อีเมล์</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="accommodation_update.email"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-center">
+                    <button class="btn btn-primary" (click)="updateData()">บันทึก</button>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>

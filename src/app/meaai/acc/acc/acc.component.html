@@ -1,0 +1,80 @@
+<app-header></app-header>
+
+<div class="container m-t-5">
+  <div class="shadow-lg p-5 mb-5 bg-white rounded">
+    <div class="content">
+      <div class="title text-center">
+        <h1 style="color: #28B463">{{ acc_res[0].acc_name }}</h1>
+      </div>
+      <div class="detail">
+        <p>{{ acc_res[0].acc_detail }}</p>
+      </div>
+      <hr>
+      <div class="type-content">
+          <div class="d-flex">
+             <h4>ประเภทที่พัก</h4>
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <h4 style="color: #28B463">{{ acc_res[0].acc_type[0].accommodation_type_name }}</h4>
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             |
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <h4>ประเภทห้อง</h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <h4 style="color: #28B463">{{ acc_res[0].room_type[0].room_type_name }}</h4>
+          </div>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>จำนวนห้องพัก</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].period_start_price  }}</h4>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>ราคาเริ่มต้น</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].period_start_price  }} บาท</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h4>ราคาสูงสุด</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].period_end_price  }} บาท</h4>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>ที่อยู่</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].address   }}</h4>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>เบอร์โทร</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].phone  }}</h4>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>เว็บไซต์</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463"><a [href]="acc_res[0].website" target="_blank" style="color: #28B463;">{{  acc_res[0].website  }}</a></h4>
+      </div>
+      <hr>
+      <div class="map d-flex">
+        <h4>อีเมล์</h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 style="color: #28B463">{{  acc_res[0].email  }}</h4>
+      </div>
+      <hr>
+      <div class="images">
+        <h4>รูปภาพ <i class="fa fa-picture-o" style="color:red" aria-hidden="true"></i></h4>
+        <br>
+        <div class="blog-img">
+            <a *ngFor="let images of acc_res[0].images" class="col-sm-12 col-md-4 col-lg-3">
+                <img class="img-show shadow" [src]="images.path">
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

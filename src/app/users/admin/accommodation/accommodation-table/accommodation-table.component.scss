@@ -1,0 +1,45 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.blog-content{
+    padding: 5%;
+}
+
+.title{
+    font-size: 2rem;
+    text-align: center;
+    color: #7386D5
+}
+
+.nowrap {
+    white-space:nowrap;
+}
+
+.btn-center{
+    text-align: center;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.bg-head{
+    background-color: #3B5998;
+    color:white;
+}
+
+.bg-edit{
+    background-color: #dfe3ee;
+    border-color: white;
+}
+
+.icon-color{
+    color: #3b5998
+}

@@ -1,0 +1,17 @@
+
+.dropdown-menu{
+    left: -50px !important;
+}
+
+.btn-login{
+    color: #0056b3;
+    &:focus {
+       background-color: white;
+    }
+}
+
+@media (max-width: 576px) {
+    .dropdown-menu{
+        left: 0 !important;
+    }
+ }

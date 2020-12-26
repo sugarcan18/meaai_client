@@ -1,0 +1,101 @@
+<app-header></app-header>
+<div class="wrapper">
+
+<app-sidebar></app-sidebar>
+    <div class="container">
+        <div class="blog-content">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="title">
+                    <p>เพิ่มข้อมูล สถานที่พัก</p>
+                </div>
+                <div class="title-content">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="nowrap">
+                                <td>ชื่อสถานที่พัก</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.accommodation_name"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รายละเอียด</td>
+                                <td> : </td>
+                                <td><textarea type="text" class="form-control" [(ngModel)]="accommodation.description"></textarea></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ประเภทที่พัก</td>
+                                <td> : </td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="accommodation.accommodation_type">
+                                        <option *ngFor="let item of acc_type" value="{{item.accommodation_type_id}}">{{item.accommodation_type_name}}</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>ประเภทห้องพัก</td>
+                                <td> : </td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="accommodation.room_type">
+                                        <option *ngFor="let item of room_type" value="{{item.room_type_id}}">{{item.room_type_name}}</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>จำนวนห้องพัก</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.room"></td>
+                            </tr>
+                            <tr>
+                                <td>ราคาห้องพัก เริ่มต้น</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.period_start_price"></td>
+                            </tr>
+                            <tr>
+                                <td>ราคาห้องพัก สูงสุด</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.period_end_price"></td>
+                            </tr>
+                            <tr>
+                                <td>ที่อยู่</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.address"></td>
+                            </tr>
+                            <tr>
+                                <td>เบอร์โทร</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.phone"></td>
+                            </tr>
+                            <tr>
+                                <td>เว็บไซต์</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.website"></td>
+                            </tr>
+                            <tr>
+                                <td>อีเมล์</td>
+                                <td> : </td>
+                                <td><input type="text" class="form-control" [(ngModel)]="accommodation.email"></td>
+                            </tr>
+                            <tr class="nowrap">
+                                <td>รูปภาพ</td>
+                                <td> : </td>
+                                <td>
+                                <div class="custom-file">
+                                    <input class="custom-file-input" type="file" id="imageflies" name="imageflies" multiple (change)="uploadImages($event)">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <br>
+                                    <span *ngFor="let i of filesToUpload_name" style="font-size: 0.7rem;">
+                                        {{i}} , <br>
+                                    </span>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-center">
+                        <button class="btn btn-primary" (click)="saveData()">บันทึก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

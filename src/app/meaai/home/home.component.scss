@@ -1,0 +1,118 @@
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../../../assets/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('../../../assets/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('../../../assets/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../../../assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+
+
+.img-w-100{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: auto;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.tite-main{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.title-main-text{
+    color: black;
+    font-size: 5rem;
+    opacity: 1;
+    font-family: Poppins-Bold;
+}
+
+.card-show {
+  margin-bottom: 2%;
+}
+
+.card-show:hover {
+  margin-top: -1%;
+  transition: 0.3s;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.shadow{
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadow:hover{
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.30) !important;
+}
+
+.title-sub-text{
+    color: black;
+    font-size: 1rem;
+    opacity: 1;
+    font-family: Poppins-SemiBold;
+}
+
+.bg-title-main{
+    opacity: 0.6;
+}
+
+.m-t-5{
+  margin-top: 5%;
+}
+
+.m-b-5{
+  margin-bottom: 5%;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.traval-img{
+  width: auto;
+  height: 200px;
+}
+
+.nowrap {
+  white-space:nowrap;
+}
+
+@media (max-width: 576px) {
+    .title-main-text{
+        color: black;
+        font-size: 2rem;
+        opacity: 1;
+        font-family: Poppins-Bold;
+    }
+    
+    .title-sub-text{
+        color: black;
+        font-size: 0.6rem;
+        opacity: 1;
+        font-family: Poppins-SemiBold;
+        line-height: normal;
+    }
+ }

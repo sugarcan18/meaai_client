@@ -1,0 +1,179 @@
+<app-header></app-header>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <div class="container">
+    <div class="blog-content">
+      <div class="title">
+        <p>ตารางสถานที่ท่องเที่ยว</p>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered table-striped">
+          <thead class="bg-head">
+            <tr class="text-center nowrap">
+              <th>No.</th>
+              <th>สถานที่ท่องเที่ยว</th>
+              <th>รายละเอียด</th>
+              <th>ประเภทท่องเที่ยว</th>
+              <th>ประเภทฤดูกาล</th>
+              <th>ละติจูด</th>
+              <th>ลองติจูด</th>
+              <th>ที่พัก</th>
+              <th>ร้านอาหาร</th>
+              <th>แก้ไข</th>
+              <th>ลบ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let travel of travel; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>{{ travel.travel_name }}</td>
+              <!-- {{(travel.travel_detail.length > 60)? (travel.travel_detail|slice:0:60)+'...' :(travel.travel_detail)}} -->
+              <td>{{ (travel.travel_detail|slice:0:60)+'...' }}</td>
+              <td>{{ travel.travel_type_id[0].travel_type_name }}</td>
+              <td>{{ travel.season_id[0].season_type_name }}</td>
+              <td>{{ travel.lat }}</td>
+              <td>{{ travel.lng }}</td>
+              <td class="text-center pointer bg-edit"><i class="fa fa-bed icon-color" aria-hidden="true"  data-toggle="modal" data-target="#Travel_Acc_Modal" (click)="check_TravelAcc(travel.travel_id)"></i></td>
+              <td class="text-center pointer bg-edit"><i class="fa fa-cutlery icon-color" aria-hidden="true" data-toggle="modal" data-target="#Travel_Res_Modal" (click)="check_TravelRes(travel.travel_id)"></i></td>
+              <td class="text-center pointer bg-edit"><i class="fa fa-pencil-square-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#updateModal" (click)="checkUpdate(travel.id)"></i></td>
+              <td class="text-center pointer bg-edit"><i class="fa fa-trash-o icon-color" aria-hidden="true" data-toggle="modal" data-target="#deleteModal" (click)="checkDelete(travel.id)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <h3>ยืนยันการลบข้อมูล</h3>
+            <h6>ชื่อสถานที่ท่องเที่ยว : {{itemDelete.travel_name}}</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" (click)="DeleteItem()">ลบข้อมูล</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal Update-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="title">
+                <p>แก้ไขข้อมูล</p>
+            </div>
+            <div class="title-content">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr class="nowrap">
+                            <td>ชื่อสถานที่ท่องเที่ยว</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="travel_update.name"></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>รายละเอียด</td>
+                            <td> : </td>
+                            <td><textarea type="text" class="form-control" [(ngModel)]="travel_update.description"></textarea></td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ประเภทท่องเที่ยว</td>
+                            <td> : </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="travel_update.type">
+                                    <option *ngFor="let item of travel_type" value="{{item.travel_type_id}}">{{item.travel_type_name}}</option>
+                                  </select>
+                            </td>
+                        </tr>
+                        <tr class="nowrap">
+                            <td>ประเภทฤดูกาล</td>
+                            <td> : </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="travel_update.season">
+                                    <option *ngFor="let item of season_type" value="{{item.season_type_id}}">{{item.season_type_name}}</option>
+                                  </select>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>จำนวนคนแนะนำ</td>
+                          <td> : </td>
+                          <td><input type="text" class="form-control" [(ngModel)]="travel_update.people"></td>
+                        </tr>
+                        <tr>
+                            <td>พิกัด ละติจูด</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="travel_update.lat"></td>
+                        </tr>
+                        <tr>
+                            <td>พิกัด ลองติจูด</td>
+                            <td> : </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="travel_update.lng"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-center">
+                    <button class="btn btn-primary" (click)="updateData()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal ACC-->
+<div class="modal fade" id="Travel_Acc_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <h3>เลือกสถานที่พักที่ใกล้เคียง</h3>
+          <div class="d-flex p-l-5" *ngFor="let item of acc">
+            <h5><input class="form-check-input" type="checkbox" value="" id="acc_checkbox" [checked]="item.status" (change)="checkstatus_acc(item.id)"> </h5>
+            <h5> {{item.name}}</h5>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="UpdateTravel_acc()">บันทึกข้อมูล</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal RES-->
+<div class="modal fade" id="Travel_Res_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <h3>เลือกร้านอาหารใกล้เคียง</h3>
+          <div class="d-flex p-l-5" *ngFor="let item of res">
+            <h5><input class="form-check-input" type="checkbox" value="" id="res_checkbox" [checked]="item.status" (change)="checkstatus_res(item.id)"> </h5>
+            <h5> {{item.name}}</h5>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="UpdateTravel_res()">บันทึกข้อมูล</button>
+      </div>
+    </div>
+  </div>
+</div>
